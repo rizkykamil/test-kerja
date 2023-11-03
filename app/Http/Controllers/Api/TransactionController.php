@@ -4,7 +4,10 @@ namespace App\Http\Controllers\Api;
 
 use App\Product;
 use App\Transaksi;
+use App\Models\Customer;
+use App\Models\Transaction;
 use Illuminate\Http\Request;
+use App\Models\PaymentMethod;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Http;
 
@@ -64,5 +67,16 @@ class TransactionController extends Controller
                 'payment_amount' => $payment_amount,
             ]
         ]);
+    }
+
+    public function storeBandung (Request $request){
+        $transaction = new Transaction();
+        $transaction->customer_id = $request->input('customer_id');
+        $transaction->product_id = $request->input('product_id');
+        $transaction->payment_method_id = $request->input('payment_method_id');
+        $transaction->price = $request->input('price');
+        $transaction->save();
+
+        return response()->json($transaction, 201);
     }
 }

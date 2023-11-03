@@ -22,3 +22,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::post('/transaction', [TransactionController::class, 'store']);
 
+Route::post('/transaction/bandung', [TransactionController::class, 'storeBandung']);
+
